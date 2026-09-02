@@ -16,8 +16,6 @@
 			cursor: pointer;
 			transform: translateY(-3px);
 			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-
-
 		}
 
 		.gradient-button:active {
@@ -34,14 +32,11 @@
 
 		}
 
-
-
 		input {
 			padding: 0.2rem 1rem;
 			font-size: 1.2rem;
 
 		}
-
 
 		.out2,
 		.out3,
@@ -62,30 +57,33 @@
 		.transport {
 			border: 2px solid black;
 			border-radius: 5px;
-			width: 100%;
 			margin: 5px;
 			padding: 5px;
 		}
 
-		#nl {
+		#nl,
+		#nlFirst {
 			display: grid;
 			gap: 0.2rem;
-			grid-template-columns: 6fr 1rf 1fr 1fr;
+			grid-template-columns: 50% 1fr 1fr 1fr 1fr;
+			/* justify-content: flex-start;
+			justify-items: start; */
 			align-items: center;
 		}
 
-		
+		.kolichestvo {
+			width: 20%;
+		}
+
 		input[type="checkbox"] {
 			width: 1.5rem;
 			height: 1.5rem;
 
 		}
 	</style>
-
 </head>
 
 <body>
-
 	<div class="content">
 		<div class="out">
 			<p> Курс Центрального Банка</p>
@@ -255,13 +253,9 @@
 					<div class="out6"></div>
 				</div>
 			</div>
-
-
 			<h3>Итого начисленно за транспорт в ДОЛЛАРАХ</h3>
 			<div class="out5">0.00</div>
 			<button id="btn5" class="gradient-button">Рассчитать</button>
-
-
 		</div>
 	</div>
 
@@ -282,20 +276,14 @@
 		let inp3 = document.querySelector('#input3')
 		let nlBoxes = document.querySelectorAll('.nl')
 
-
-
 		const now = new Date();
 		let kursDay = now.toLocaleDateString("ru-RU");
 		out.insertAdjacentText('beforeBegin', kursDay);
 
-
 		let curentKursCB = async function currentCurs() {
 			let kursPromise = await fetch('https://iss.moex.com/iss/statistics/engines/currency/markets/selt/rates.json?iss.meta=off');
-
 			let kursPromiseJson = await kursPromise.json()
-
 			let kursString = await kursPromiseJson.cbrf.data[0][kursPromiseJson.cbrf.columns.indexOf('CBRF_USD_LAST')];
-
 			out1.textContent = kursString;
 
 			broker(kursString)
@@ -312,13 +300,11 @@
 			out2.textContent = perevodBrokeru2.toFixed(2);
 		}
 
-
 		function transport(kursString) {
 			let inpValue2 = inp2.value
 			let perevodTransportoi = ((kursString + (kursString * 4 / 100)) * inpValue2) + 2750
 			out3.textContent = perevodTransportoi.toFixed(2);
 		}
-
 
 		function ecuador() {
 			let inpValue3 = inp3.value
@@ -326,11 +312,9 @@
 			out4.textContent = raschetEcuador.toFixed(2);
 		}
 
-
 		function nl() {
 			let sum = 0;
 			let num = 0;
-
 
 			nlBoxes.forEach((value, index, array) => {
 				const checkbox = value.querySelector('.checkbox');
@@ -340,28 +324,19 @@
 				if (checkbox && checkbox.checked) {
 					out6.textContent = (1850 / umestitisy * kolichestvo).toFixed(2)
 					num = Number(out6.textContent)
-
 				}
-
 				sum += num
-
 			})
 			console.log(sum)
 			out5.textContent = sum
 		}
-
-
-
 		btn.addEventListener('click', function () { curentKursCB() })
 		btn2.addEventListener('click', function () { curentKursCB() })
 		btn3.addEventListener('click', ecuador)
 		btn5.addEventListener('click', nl)
-
-
-
-
-
+		
 	</script>
 </body>
 
 </html>
+
