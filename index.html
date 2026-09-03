@@ -83,6 +83,10 @@
 			height: 1.5rem;
 
 		}
+
+		.rotate {
+			transform: rotate(135deg);
+		}
 	</style>
 
 </head>
@@ -128,25 +132,23 @@
 			<h3>Тариф 1850$ за паллет</h3>
 
 			<div id="nlFirst">
-				<div>
-					<h4>Формат</h4>
-					<h4>коробки</h4>
+				<div class="rotate">
+					<p>Формат</p>
+					<p>коробки</p>
+				</div>
+				<div class="rotate">
+					<p>Умещается </p>
+					<p>на паллете</p>
 
 				</div>
-				<div>
-					<h4>Умещается </h4>
-					<h4>на паллете</h4>
-
+				<div class="rotate">
+					<p>Нужное </h>
+					<p>количество </p>
+					<p>коробок</p>
 				</div>
-				<div>
-					<h4>Нужное </h>
-						<h4>количество </h4>
-						<h4>коробок</h4>
-				</div>
-				<div>
-					<h4>Сумма в</h4>
-					<h4>долларах</h4>
-
+				<div class="rotate">
+					<p>Сумма в</p>
+					<p>долларах</p>
 				</div>
 			</div>
 
@@ -245,6 +247,7 @@
 			<div class="out5">0.00</div>
 			<button id="btn5" class="gradient-button">Рассчитать</button>
 
+
 		</div>
 	</div>
 
@@ -264,6 +267,8 @@
 		let inp2 = document.querySelector('#input2')
 		let inp3 = document.querySelector('#input3')
 		let nlBoxes = document.querySelectorAll('.nl')
+
+
 
 		const now = new Date();
 		let kursDay = now.toLocaleDateString("ru-RU");
@@ -293,11 +298,13 @@
 			out2.textContent = perevodBrokeru2.toFixed(2);
 		}
 
+
 		function transport(kursString) {
 			let inpValue2 = inp2.value
 			let perevodTransportoi = ((kursString + (kursString * 4 / 100)) * inpValue2) + 2750
 			out3.textContent = perevodTransportoi.toFixed(2);
 		}
+
 
 		function ecuador() {
 			let inpValue3 = inp3.value
@@ -305,15 +312,18 @@
 			out4.textContent = raschetEcuador.toFixed(2);
 		}
 
+
 		function nl() {
 			let sum = 0;
 			let num = 0;
+
 
 			nlBoxes.forEach((value, index, array) => {
 
 				const umestitisy = value.querySelector('.umestitisy').textContent;
 				const out6 = value.querySelector('.out6');
 				const kolichestvo = value.querySelector('.kolichestvo').value;
+
 
 				if (kolichestvo && Number(kolichestvo) > 0) {
 					out6.textContent = (1850 / umestitisy * kolichestvo).toFixed(2)
@@ -324,10 +334,14 @@
 			out5.textContent = num.toFixed(2);
 		}
 
+
+
 		btn.addEventListener('click', function () { curentKursCB() })
 		btn2.addEventListener('click', function () { curentKursCB() })
 		btn3.addEventListener('click', ecuador)
 		btn5.addEventListener('click', nl)
+
+
 
 
 
