@@ -301,14 +301,14 @@
 
 		function transport(kursString) {
 			let inpValue2 = inp2.value
-			let perevodTransportoi = ((kursString + (kursString * 4 / 100)) * inpValue2) + 2750
+			let perevodTransportoi = ((kursString + (kursString * 4 / 100)) * inpValue2)
 			out3.textContent = perevodTransportoi.toFixed(2);
 		}
 
 
 		function ecuador() {
 			let inpValue3 = inp3.value
-			let raschetEcuador = (inpValue3 * 7.9 + 10)
+			let raschetEcuador = (inpValue3 * 7.75 + 10)
 			out4.textContent = raschetEcuador.toFixed(2);
 		}
 
