@@ -293,8 +293,8 @@
 
 		function broker(kursString) {
 			let inpValue = inp.value
-			let perevodBrokeru1 = (kursString + 3.5) * inpValue;
-			let perevodBrokeru2 = ((perevodBrokeru1 * 6.5 / 100) + perevodBrokeru1 + 30);
+			let perevodBrokeru1 = (kursString + 4) * inpValue;
+			let perevodBrokeru2 = ((perevodBrokeru1 * 6.5 / 100) + perevodBrokeru1 + 30*(kursString + 4));
 			out2.textContent = perevodBrokeru2.toFixed(2);
 		}
 
